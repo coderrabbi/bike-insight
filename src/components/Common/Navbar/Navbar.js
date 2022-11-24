@@ -1,11 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import logo from "../../../assets/bike-insight.png";
+
 const Navbar = () => {
+  //   const navLinks = [
+  //     { name: "Home", to: "/" },
+  //     { name: "Services", to: "/services" },
+  //     { name: "About Me", to: "/about" },
+  //     { name: "Blog", to: "/blog" },
+  //   ];
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-gray-100">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <a to="/" className="btn btn-ghost normal-case text-xl">
+            <img src={logo} alt="bike-insight" className="h-[50px]" />
+          </a>
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
