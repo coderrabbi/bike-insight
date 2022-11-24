@@ -1,12 +1,45 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../assets/bike-insight.png";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../../Context/AuthProvider";
+import { toast } from "react-toastify";
+import Loader from "../../../components/Loader/Loader";
 const Login = () => {
-  const { googleSignIn, handleGithubSignIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const { googleSignIn, handleGithubSignIn, signIn, setLoading, loading } =
+    useContext(AuthContext);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+
+        if (user.uid) {
+          navigate(from, { replace: true });
+          setLoading(false);
+          toast.success("login successful");
+        }
+        form.reset();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
+      {loading && <Loader />}
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
@@ -18,10 +51,12 @@ const Login = () => {
                   className="mx-auto inline-block max-w-[160px]"
                 />
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-6">
                   <input
-                    type="text"
+                    type="email"
+                    name="email"
+                    required
                     placeholder="Email"
                     className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
                   />
@@ -29,6 +64,8 @@ const Login = () => {
                 <div className="mb-6">
                   <input
                     type="password"
+                    name="password"
+                    required
                     placeholder="Password"
                     className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
                   />
