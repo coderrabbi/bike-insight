@@ -3,13 +3,15 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/bike-insight.png";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { VscMenu, VscChromeClose } from "react-icons/vsc";
+// import DashboardLayout from "../../Layout/DashboardLayout";
 import avater from "../../../assets/avater.png";
 const Navbar = () => {
   const navLinks = [
     { name: "Home", to: "/" },
-    { name: "Bikes", to: "/services" },
-    { name: "About Me", to: "/about" },
+    { name: "Bikes", to: "/bikes" },
+    { name: "About Us", to: "/about" },
     { name: "Blog", to: "/blog" },
+    { name: "Contact", to: "/contact" },
   ];
   const { user, logOut } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
@@ -55,43 +57,56 @@ const Navbar = () => {
                       My Products
                     </li>
                   </NavLink>
+                  <div className="dropdown dropdown-end">
+                    <label tabIndex={0} className="btn btn-ghost btn-circle">
+                      <div className="indicator">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                          />
+                        </svg>
+                        <span className="badge badge-sm indicator-item">8</span>
+                      </div>
+                    </label>
+                    <div
+                      tabIndex={0}
+                      className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+                    >
+                      <div className="card-body">
+                        <span className="font-bold text-lg">8 Items</span>
+                        <span className="text-info">Subtotal: $999</span>
+                        <div className="card-actions">
+                          <button className="btn bg-black btn-block">
+                            View cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </>
               ) : (
-                ""
+                <>
+                  <NavLink to={"/login"}>
+                    <li className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-600 focus:text-red-600">
+                      Login
+                    </li>
+                  </NavLink>
+                  <NavLink to={"/register"}>
+                    <li className="text-base btn list-none font-medium  transition-all duration-200 hover:text-gray-600 focus:text-red-600">
+                      Register
+                    </li>
+                  </NavLink>
+                </>
               )}
-            </div>
-          </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-                <span className="badge badge-sm indicator-item">8</span>
-              </div>
-            </label>
-            <div
-              tabIndex={0}
-              className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn bg-black btn-block">View cart</button>
-                </div>
-              </div>
             </div>
           </div>
           {user ? (
@@ -111,6 +126,11 @@ const Navbar = () => {
                 <li>
                   <Link className="justify-between">Profile</Link>
                 </li>
+                {/* <li>
+                  <Link to="/dashboard" className="justify-between">
+                    <DashboardLayout />
+                  </Link>
+                </li> */}
 
                 <li
                   onClick={handleSignOut}
@@ -128,11 +148,7 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <NavLink to={"/login"}>
-              <li className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-600 focus:text-red-600">
-                Login
-              </li>
-            </NavLink>
+            ""
           )}
 
           {!toggle ? (
@@ -150,7 +166,7 @@ const Navbar = () => {
           )}
 
           {toggle && (
-            <nav className="pt-4 mt-[22rem] pb-6 bg-white border border-gray-200 rounded-md shadow-md lg:hidden absolute right-5 w-[200px] z-[10]">
+            <nav className="pt-4 mt-[21rem] pb-6 bg-white border border-gray-200 rounded-md shadow-md lg:hidden absolute right-5 w-[200px] z-[10]">
               <div className="flow-root">
                 <div className="flex flex-col px-6 -my-2 space-y-1 text-center">
                   {navLinks.map((item, index) => (
@@ -200,7 +216,7 @@ const Navbar = () => {
                     <NavLink
                       to="/login"
                       title=""
-                      className="inline-flex justify-center px-4 py-3 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md tems-center hover:bg-blue-700 focus:bg-blue-700"
+                      className="inline-flex justify-center px-4 py-3 text-base font-semibold text-white transition-all duration-200 bg-black border border-transparent rounded-md tems-center hover:bg-gray-900 "
                       role="button"
                     >
                       {" "}

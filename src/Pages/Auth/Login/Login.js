@@ -19,13 +19,9 @@ const Login = () => {
     console.log(email, password);
     signIn(email, password)
       .then((result) => {
-        const user = result.user;
-
-        if (user.uid) {
-          navigate(from, { replace: true });
-          setLoading(false);
-          toast.success("login successful");
-        }
+        navigate(from, { replace: true });
+        setLoading(false);
+        toast.success("login successful");
         form.reset();
       })
       .catch((error) => {

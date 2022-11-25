@@ -1,34 +1,61 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../assets/bike-insight.png";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { toast } from "react-toastify";
-const Register = () => {
-  const { createUser, setLoading, handleGithubSignIn, googleSignIn } =
-    useContext(AuthContext);
 
+const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const {
+    createUser,
+    setLoading,
+    handleGithubSignIn,
+    updateUser,
+    googleSignIn,
+  } = useContext(AuthContext);
+  // const [formData, setFormData] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    const userName = form.userName.value;
+    const role = form.roleRadio.value;
+    console.log(email, password, userName, role);
+    // fetch("http://localhost:5000/user/register", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: {},
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data))
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        if (user) {
-          setLoading(false);
-          toast.success("user created successfully");
-        }
+        navigate(from, { replace: true });
+        setLoading(false);
+        const userInfo = {
+          displayName: form.userName.value,
+        };
+        console.log(userInfo);
+        updateUser(userInfo)
+          .then({})
+          .catch((error) => console.log(error));
+        toast.success("user created successfully");
+
         form.reset();
       })
-      .catch((error) => {
-        console.log(error);
-        alert("email already in use");
-        form.reset();
-      });
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -48,8 +75,8 @@ const Register = () => {
                 <div className="mb-6">
                   <input
                     type="text"
-                    placeholder="Full Name"
-                    name="fullName"
+                    placeholder="User Name"
+                    name="userName"
                     className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-black focus-visible:shadow-none"
                     required
                   />
@@ -71,6 +98,39 @@ const Register = () => {
                     className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-black focus-visible:shadow-none"
                     required
                   />
+                </div>
+                <div className="mb-6">
+                  <div className="flex items-center mb-4">
+                    <input
+                      id="default-radio-1"
+                      type="radio"
+                      value="buyer"
+                      name="roleRadio"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                      htmlFor="default-radio-1"
+                      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                      Buyer
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      checked
+                      id="default-radio-2"
+                      type="radio"
+                      value="seller"
+                      name="roleRadio"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                      htmlFor="default-radio-2"
+                      className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                      Seller
+                    </label>
+                  </div>
                 </div>
                 <div className="mb-10">
                   <button
