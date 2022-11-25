@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const BuyModal = ({ details }) => {
   const { user } = useContext(AuthContext);
-  // const [booking, setBooking] = useState({});
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -23,7 +23,7 @@ const BuyModal = ({ details }) => {
       telephone: telephone,
     };
     console.log(booking);
-    fetch(`http://localhost:5000/bikes/${details.category}`, {
+    fetch(`http://localhost:5000/bookings/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(booking),
@@ -33,6 +33,9 @@ const BuyModal = ({ details }) => {
         console.log(data);
         toast.success("booking sucessfull");
         form.reset();
+      })
+      .catch((err) => {
+        toast.danger(err.message);
       });
   };
 

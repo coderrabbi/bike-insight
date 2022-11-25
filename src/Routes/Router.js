@@ -8,6 +8,7 @@ import Login from "../Pages/Auth/Login/Login";
 import Register from "../Pages/Auth/Register/Register";
 import NotFound from "../Pages/NotFound/NotFound";
 import Bikes from "../Pages/BIkes/Bikes";
+import MyOrders from "../components/MyOrders/MyOrders";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -25,7 +26,11 @@ export const routes = createBrowserRouter([
         path: "/bikes/:category",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/bikes/${params.category}`),
-        element: <Bikes />,
+        element: (
+          <PrivetRouter>
+            <Bikes />
+          </PrivetRouter>
+        ),
       },
     ],
   },
@@ -36,6 +41,6 @@ export const routes = createBrowserRouter([
         <DashboardLayout />
       </PrivetRouter>
     ),
-    children: [{ path: "/dashboard", element: <Dashboard /> }],
+    children: [{ path: "/dashboard", element: <MyOrders /> }],
   },
 ]);
