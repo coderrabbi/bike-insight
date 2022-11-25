@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "../components/Dadhboard/Dashboard";
 import Home from "../components/Home/Home";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import PrivetRouter from "./PrivetRouter/PrivetRouter";
@@ -9,6 +8,7 @@ import Register from "../Pages/Auth/Register/Register";
 import NotFound from "../Pages/NotFound/NotFound";
 import Bikes from "../Pages/BIkes/Bikes";
 import MyOrders from "../components/MyOrders/MyOrders";
+import AddProducts from "../Pages/AddProducts/AddProducts";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -23,9 +23,17 @@ export const routes = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       {
-        path: "/bikes/:category",
+        path: "/addproducts",
+        element: (
+          <PrivetRouter>
+            <AddProducts />
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "/products/:category",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bikes/${params.category}`),
+          fetch(`http://localhost:5000/products/${params.category}`),
         element: (
           <PrivetRouter>
             <Bikes />

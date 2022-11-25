@@ -4,11 +4,17 @@ import logo from "../../../assets/bike-insight.png";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { toast } from "react-toastify";
+import useToken from "../../../components/Hooks/useToken";
 
 const Register = () => {
+  const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(userEmail);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  if (token) {
+    navigate(from, { replace: true });
+  }
   const {
     createUser,
     setLoading,
@@ -16,7 +22,6 @@ const Register = () => {
     updateUser,
     googleSignIn,
   } = useContext(AuthContext);
-  // const [formData, setFormData] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -24,39 +29,50 @@ const Register = () => {
     const password = form.password.value;
     const userName = form.userName.value;
     const role = form.roleRadio.value;
-    console.log(email, password, userName, role);
-    // fetch("http://localhost:5000/user/register", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: {},
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data))
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate(from, { replace: true });
         setLoading(false);
         const userInfo = {
           displayName: form.userName.value,
         };
-        console.log(userInfo);
+
         updateUser(userInfo)
-          .then({})
+          .then(() => {
+            saveUser(userName, email, role);
+          })
           .catch((error) => console.log(error));
         toast.success("user created successfully");
 
         form.reset();
       })
       .catch((error) => console.log(error));
+    const saveUser = (userName, email, role) => {
+      const user = { userName, email, role };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setUserEmail(email);
+          navigate(from, { replace: true });
+        })
+        .catch((err) => toast.warning(err.message));
+    };
   };
+  // const userToken = (email) => {
+  //   fetch(`http://localhost:5000/jwt?email=${email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.accessToken) {
+  //         localStorage.setItem("accessToken", data.accessToken);
+  //         navigate(from, { replace: true });
+  //       }
+  //     });
+  // };
 
   return (
     <section className="bg-[#F4F7FF] py-10 lg:py-[80px]">

@@ -42,12 +42,12 @@ const Navbar = () => {
               ))}
               {user ? (
                 <>
-                  <NavLink to={"/reviews"}>
+                  <NavLink to={"/dashboard"}>
                     <li className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-600 focus:text-red-600">
                       My Orders
                     </li>
                   </NavLink>
-                  <NavLink to={"/addservices"}>
+                  <NavLink to={"/addproducts"}>
                     <li className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-600 focus:text-red-600">
                       Add Products
                     </li>

@@ -25,7 +25,7 @@ const BikesCategory = () => {
             <div className="card-body justify-center">
               <h2 className="card-title pb-5 text-3xl">{item.categoryName}</h2>
               <div className="card-actions justify-end">
-                <Link to={`/bikes/${item.category}`}>
+                <Link to={`/products/${item.category}`}>
                   <button className="py-4 px-7 bg-black rounded-xl hover:bg-red-500">
                     Visit Now
                   </button>

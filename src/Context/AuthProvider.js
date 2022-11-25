@@ -19,7 +19,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [tokenId, setTokenId] = useState("");
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -39,6 +39,7 @@ const AuthProvider = ({ children }) => {
         console.log(user);
         setUser(user);
         if (user.uid) {
+          setTokenId(user.uid);
           // navigate(from, { replace: true });
           setLoading(false);
           toast.success("login sucessfull");
@@ -59,6 +60,7 @@ const AuthProvider = ({ children }) => {
       .then((result) => {
         const user = result.user;
         if (user.uid) {
+          setTokenId(user.uid);
           // navigate(from, { replace: true });
           toast.success("login success");
           setLoading(false);
@@ -89,6 +91,8 @@ const AuthProvider = ({ children }) => {
     updateUser,
     user,
     loading,
+    setTokenId,
+    tokenId,
     setLoading,
     handleGithubSignIn,
     googleSignIn,

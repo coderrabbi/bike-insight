@@ -10,7 +10,7 @@ const Bikes = () => {
   return (
     <div className={`${styles.padding}`}>
       <h1 className="text-[60px] font-semibold uppercase text-center">
-        {data[0].categoryName}
+        {data[0]}
       </h1>
       {data.map((item) => (
         <div
@@ -20,11 +20,11 @@ const Bikes = () => {
           <img
             className="w-full h-56 object-cover object-center"
             src={item.imgUrl}
-            alt={item.categoryName}
+            alt={item?.title}
           />
           <div className="py-4 px-6">
             <h1 className="text-2xl font-semibold text-gray-800">
-              {item.title}
+              {item?.title}
             </h1>
             <p className="py-2 text-lg text-gray-700">
               {item.description.slice(0, 115)}...

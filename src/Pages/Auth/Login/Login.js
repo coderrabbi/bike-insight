@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../assets/bike-insight.png";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { toast } from "react-toastify";
 import Loader from "../../../components/Loader/Loader";
+import useToken from "../../../components/Hooks/useToken";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
   const from = location.state?.from?.pathname || "/";
+  if (token) {
+    navigate(from, { replace: true });
+  }
   const { googleSignIn, handleGithubSignIn, signIn, setLoading, loading } =
     useContext(AuthContext);
   const handleSubmit = (event) => {
@@ -19,7 +25,8 @@ const Login = () => {
     console.log(email, password);
     signIn(email, password)
       .then((result) => {
-        navigate(from, { replace: true });
+        setLoginUserEmail(email);
+
         setLoading(false);
         toast.success("login successful");
         form.reset();
