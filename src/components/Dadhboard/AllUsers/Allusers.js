@@ -11,6 +11,7 @@ const AllUsers = () => {
       return data;
     },
   });
+  console.log(users);
   const [newUser, setNewUser] = useState(users);
   const handelDelete = (email) => {
     const confirm = window.confirm("Are you sure you want to delete");
@@ -47,7 +48,7 @@ const AllUsers = () => {
             {newUser.map((user, i) => (
               <tr key={user._id}>
                 <th>{i + 1}</th>
-                <td>{user.name}</td>
+                <td>{user.userName}</td>
                 <td>{user.email}</td>
                 <td>{user?.role}</td>
                 <td>

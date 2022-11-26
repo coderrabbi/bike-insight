@@ -14,6 +14,8 @@ import AddProducts from "../components/Dadhboard/AddProducts/AddProducts";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import SellerRoute from "./AdminRoute/SellerRoute";
 import MyProducts from "../components/Dadhboard/MyProducts/MyProducts";
+import AllProducts from "../components/Dadhboard/AllProducts/AllProducts";
+import Payment from "../components/Dadhboard/MyProducts/Payment/Payment";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -27,7 +29,6 @@ export const routes = createBrowserRouter([
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-
       {
         path: "/products/:category",
         loader: ({ params }) =>
@@ -73,6 +74,18 @@ export const routes = createBrowserRouter([
             <MyProducts />
           </SellerRoute>
         ),
+      },
+      {
+        path: "/dashboard/allproducts",
+        element: (
+          <AdminRoute>
+            <AllProducts />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payments/:id",
+        element: <Payment />,
       },
     ],
   },
