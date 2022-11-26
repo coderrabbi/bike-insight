@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/bike-insight.png";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { VscMenu, VscChromeClose } from "react-icons/vsc";
-// import DashboardLayout from "../../Layout/DashboardLayout";
+
 import avater from "../../../assets/avater.png";
 const Navbar = () => {
   const navLinks = [

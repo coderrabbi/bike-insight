@@ -8,10 +8,10 @@ import useSeller from "../Hooks/useSeller";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+
   const [admin] = useAdmin(user?.email);
   const [seller] = useSeller(user?.email);
-  console.log(admin);
+
   return (
     <div>
       <Navbar />
@@ -28,18 +28,21 @@ const DashboardLayout = () => {
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {admin || seller ? (
-              <li>
-                <Link to="addproducts">Add products</Link>
-              </li>
+              <>
+                <li>
+                  <Link to="addproducts">Add products</Link>
+                </li>
+                <li>
+                  <Link to="myproducts">My Products</Link>
+                </li>
+              </>
             ) : (
               ""
             )}
             <li>
               <Link to="myorders">My Orders</Link>
             </li>
-            <li>
-              <Link to="myorders">My Orders</Link>
-            </li>
+
             {admin && (
               <>
                 <li>

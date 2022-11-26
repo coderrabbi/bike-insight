@@ -20,7 +20,6 @@ const AllUsers = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data.deletedCount > 0) {
             const remaining = newUser.filter((user) => user.email !== email);
             setNewUser(remaining);

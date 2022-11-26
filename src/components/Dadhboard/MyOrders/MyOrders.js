@@ -1,22 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
-  const [data, setData] = useState([]);
-
-  // const { data: bookings = [] } = useQuery({
-  //   queryKey: ["bookings", user?.email],
-  //   queryFn: async () => {
-  //     const res = await fetch(url, {
-  //       headers: {
-  //         authorization: `bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     });
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // });
+  const [orderData, setOrderData] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
@@ -25,9 +13,27 @@ const MyOrders = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => setData(data))
+      .then((data) => setOrderData(data))
       .catch((err) => console.log(err));
   }, [user]);
+
+  const handelDelete = (id) => {
+    const confirm = window.confirm("Are you sure you want to delete");
+    if (confirm) {
+      fetch(`http://localhost:5000/bookings/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            const remaining = orderData.filter((item) => item._id !== id);
+            setOrderData(remaining);
+          }
+          toast.success("deleted User successfully");
+        });
+    }
+  };
 
   return (
     <div>
@@ -40,16 +46,25 @@ const MyOrders = () => {
               <th>Location</th>
               <th>Category</th>
               <th>Price</th>
+              <th>Delete orders</th>
             </tr>
           </thead>
           <tbody>
-            {data?.map((item, index) => (
-              <tr>
+            {orderData?.map((item, index) => (
+              <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{item.title}</td>
                 <td>{item.location}</td>
                 <td>{item.category}</td>
                 <td>${item.sellprice}</td>
+                <td>
+                  <button
+                    onClick={() => handelDelete(item._id)}
+                    className="btn"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

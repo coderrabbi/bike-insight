@@ -13,6 +13,7 @@ import AllUsers from "../components/Dadhboard/AllUsers/Allusers";
 import AddProducts from "../components/Dadhboard/AddProducts/AddProducts";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import SellerRoute from "./AdminRoute/SellerRoute";
+import MyProducts from "../components/Dadhboard/MyProducts/MyProducts";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -62,6 +63,14 @@ export const routes = createBrowserRouter([
         element: (
           <SellerRoute>
             <AddProducts />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myproducts",
+        element: (
+          <SellerRoute>
+            <MyProducts />
           </SellerRoute>
         ),
       },
