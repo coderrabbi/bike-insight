@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../Context/AuthProvider";
-import styles from "../../styles";
+
 import moment from "moment";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../Context/AuthProvider";
+import styles from "../../../styles";
 const AddProducts = () => {
   const { user } = useContext(AuthContext);
   console.log(user);

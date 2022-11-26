@@ -8,9 +8,10 @@ import Register from "../Pages/Auth/Register/Register";
 import NotFound from "../Pages/NotFound/NotFound";
 import Bikes from "../Pages/BIkes/Bikes";
 import MyOrders from "../components/Dadhboard/MyOrders/MyOrders";
-import AddProducts from "../Pages/AddProducts/AddProducts";
 import Dashboard from "../components/Dadhboard/Dashboard";
 import AllUsers from "../components/Dadhboard/AllUsers/Allusers";
+import AddProducts from "../components/Dadhboard/AddProducts/AddProducts";
+import AdminRoute from "./AdminRoute/AdminRoute";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -24,14 +25,14 @@ export const routes = createBrowserRouter([
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      {
-        path: "/addproducts",
-        element: (
-          <PrivetRouter>
-            <AddProducts />
-          </PrivetRouter>
-        ),
-      },
+      // {
+      //   path: "/addproducts",
+      //   element: (
+      //     <PrivetRouter>
+      //       <AddProducts />
+      //     </PrivetRouter>
+      //   ),
+      // },
       {
         path: "/products/:category",
         loader: ({ params }) =>
@@ -54,7 +55,14 @@ export const routes = createBrowserRouter([
     children: [
       { path: "/dashboard/myorders", element: <MyOrders /> },
       { path: "/dashboard", element: <Dashboard /> },
-      { path: "/dashboard/allusers", element: <AllUsers /> },
+      {
+        path: "/dashboard/allusers",
+        element: (
+          <AdminRoute>
+            <AllUsers />{" "}
+          </AdminRoute>
+        ),
+      },
       { path: "/dashboard/addproducts", element: <AddProducts /> },
     ],
   },

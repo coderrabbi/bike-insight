@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 const AllUsers = () => {
-  const { data: users = [], refetch } = useQuery({
+  const { data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/users`);
@@ -10,23 +10,6 @@ const AllUsers = () => {
       return data;
     },
   });
-  console.log(users);
-
-  //   const handleMakeAdmin = (id) => {
-  //     fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/users/admin/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         authorization: `bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         if (data.modifiedCount > 0) {
-  //           toast.success("Make admin successful.");
-  //           refetch();
-  //         }
-  //       });
-  //   };
 
   return (
     <div>
@@ -35,7 +18,7 @@ const AllUsers = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>user</th>
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
