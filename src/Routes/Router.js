@@ -12,6 +12,7 @@ import Dashboard from "../components/Dadhboard/Dashboard";
 import AllUsers from "../components/Dadhboard/AllUsers/Allusers";
 import AddProducts from "../components/Dadhboard/AddProducts/AddProducts";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import SellerRoute from "./AdminRoute/SellerRoute";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -25,14 +26,7 @@ export const routes = createBrowserRouter([
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      // {
-      //   path: "/addproducts",
-      //   element: (
-      //     <PrivetRouter>
-      //       <AddProducts />
-      //     </PrivetRouter>
-      //   ),
-      // },
+
       {
         path: "/products/:category",
         loader: ({ params }) =>
@@ -63,7 +57,14 @@ export const routes = createBrowserRouter([
           </AdminRoute>
         ),
       },
-      { path: "/dashboard/addproducts", element: <AddProducts /> },
+      {
+        path: "/dashboard/addproducts",
+        element: (
+          <SellerRoute>
+            <AddProducts />
+          </SellerRoute>
+        ),
+      },
     ],
   },
 ]);
