@@ -44,19 +44,10 @@ const Navbar = () => {
                 <>
                   <NavLink to={"/dashboard"}>
                     <li className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-600 focus:text-red-600">
-                      My Orders
+                      Dashboard
                     </li>
                   </NavLink>
-                  <NavLink to={"/addproducts"}>
-                    <li className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-600 focus:text-red-600">
-                      Add Products
-                    </li>
-                  </NavLink>
-                  <NavLink to={"/addservices"}>
-                    <li className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-600 focus:text-red-600">
-                      My Products
-                    </li>
-                  </NavLink>
+
                   <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle">
                       <div className="indicator">
@@ -110,43 +101,39 @@ const Navbar = () => {
             </div>
           </div>
           {user ? (
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img
-                    src={user?.photoURL ? user.photoURL : avater}
-                    alt="profile"
-                  />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            <>
+              <label
+                htmlFor="dashboard-drawer"
+                className="btn  drawer-button lg:hidden"
               >
-                <li>
-                  <Link className="justify-between">Profile</Link>
-                </li>
-                {/* <li>
-                  <Link to="/dashboard" className="justify-between">
-                    <DashboardLayout />
-                  </Link>
-                </li> */}
+                <VscMenu />
+              </label>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={user?.photoURL ? user.photoURL : avater}
+                      alt="profile"
+                    />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link className="justify-between">Profile</Link>
+                  </li>
 
-                <li
-                  onClick={handleSignOut}
-                  className="cursor-pointer bg-black text-white py-3 "
-                >
-                  Logout
-                </li>
-                <li
-                  tabIndex={1}
-                  htmlFor="dashboard-drawer"
-                  className="cursor-pointer bg-black text-white py-3 lg:hidden flex "
-                >
-                  Open drawer
-                </li>
-              </ul>
-            </div>
+                  <li
+                    onClick={handleSignOut}
+                    className="cursor-pointer bg-black text-white py-3 "
+                  >
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            </>
           ) : (
             ""
           )}
@@ -179,6 +166,14 @@ const Navbar = () => {
                       </li>
                     </NavLink>
                   ))}
+                  <NavLink to="/dashboard">
+                    <li
+                      to="/dashboard"
+                      className="text-base list-none font-medium text-black transition-all duration-200 hover:text-red-500 focus:text-red-600"
+                    >
+                      Dashboard
+                    </li>
+                  </NavLink>
                 </div>
               </div>
 

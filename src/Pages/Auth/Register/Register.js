@@ -58,7 +58,6 @@ const Register = () => {
         .then((res) => res.json())
         .then((data) => {
           setUserEmail(email);
-          navigate(from, { replace: true });
         })
         .catch((err) => toast.warning(err.message));
     };

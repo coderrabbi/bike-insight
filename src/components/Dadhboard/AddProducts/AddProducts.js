@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import styles from "../../styles";
 import moment from "moment";
+import { toast } from "react-toastify";
 const AddProducts = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const [category, setCategory] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,6 +23,7 @@ const AddProducts = () => {
       title: title,
       imgUrl: imgUrl,
       email: user?.email,
+      username: user?.displayName,
       buyprice: buyprice,
       sellprice: sellprice,
       location: location,
@@ -37,7 +40,13 @@ const AddProducts = () => {
       body: JSON.stringify(productInfo),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("products adeed successfully");
+          form.reset();
+        }
+      })
+      .catch((err) => console.log(err));
   };
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -185,9 +194,9 @@ const AddProducts = () => {
         </div>
         <button
           type="submit"
-          className="text-white bg-black hover:bg-grey-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-black "
+          className="text-white  bg-black hover:bg-grey-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-black "
         >
-          Submit
+          Add Product
         </button>
       </form>
     </div>

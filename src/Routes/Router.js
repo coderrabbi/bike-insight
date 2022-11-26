@@ -7,8 +7,10 @@ import Login from "../Pages/Auth/Login/Login";
 import Register from "../Pages/Auth/Register/Register";
 import NotFound from "../Pages/NotFound/NotFound";
 import Bikes from "../Pages/BIkes/Bikes";
-import MyOrders from "../components/MyOrders/MyOrders";
+import MyOrders from "../components/Dadhboard/MyOrders/MyOrders";
 import AddProducts from "../Pages/AddProducts/AddProducts";
+import Dashboard from "../components/Dadhboard/Dashboard";
+import AllUsers from "../components/Dadhboard/AllUsers/Allusers";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -49,6 +51,11 @@ export const routes = createBrowserRouter([
         <DashboardLayout />
       </PrivetRouter>
     ),
-    children: [{ path: "/dashboard", element: <MyOrders /> }],
+    children: [
+      { path: "/dashboard/myorders", element: <MyOrders /> },
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/dashboard/allusers", element: <AllUsers /> },
+      { path: "/dashboard/addproducts", element: <AddProducts /> },
+    ],
   },
 ]);

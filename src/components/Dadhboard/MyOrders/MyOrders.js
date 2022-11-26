@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Context/AuthProvider";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -38,6 +38,7 @@ const MyOrders = () => {
               <th>Item</th>
               <th>Products Name</th>
               <th>Location</th>
+              <th>Category</th>
               <th>Price</th>
             </tr>
           </thead>
@@ -47,7 +48,8 @@ const MyOrders = () => {
                 <th>{index + 1}</th>
                 <td>{item.title}</td>
                 <td>{item.location}</td>
-                <td>৳{item.sellprice}</td>
+                <td>{item.category}</td>
+                <td>${item.sellprice}</td>
               </tr>
             ))}
           </tbody>
