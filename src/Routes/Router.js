@@ -36,7 +36,6 @@ export const routes = createBrowserRouter([
         loader: () => fetch(`http://localhost:5000/users`),
         element: (
           <PrivetRouter>
-            {" "}
             <Profile />
           </PrivetRouter>
         ),

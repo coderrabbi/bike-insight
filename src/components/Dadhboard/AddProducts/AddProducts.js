@@ -1,13 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import moment from "moment";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../Context/AuthProvider";
 import styles from "../../../styles";
+import axios from "axios";
 const AddProducts = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const [category, setCategory] = useState("");
+  const [userVarified, setUserVarified] = useState({});
+  console.log(userVarified);
+
+  useEffect(() => {
+    const varifiedUser = async () => {
+      const res = axios.get(`http://localhost:5000/users/${user?.email}`);
+      setUserVarified(res.data);
+    };
+    varifiedUser();
+  }, [user?.email]);
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
