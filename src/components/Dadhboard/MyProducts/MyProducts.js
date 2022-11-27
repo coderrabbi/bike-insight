@@ -29,6 +29,21 @@ const MyProducts = () => {
         });
     }
   };
+
+  const updateAd = {
+    advertise: true,
+  };
+  const handleAdvertise = (id) => {
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateAd),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
   return (
     <div>
       <div className="overflow-x-auto mt-10">
@@ -39,6 +54,7 @@ const MyProducts = () => {
               <th>Location</th>
               <th>Category</th>
               <th>Price</th>
+              <th>Advertise product</th>
               <th>Delete Products</th>
             </tr>
           </thead>
@@ -52,9 +68,21 @@ const MyProducts = () => {
                     <td>{item.category}</td>
                     <td>${item.sellprice}</td>
                     <td>
+                      {item.advertise ? (
+                        <p className="text-green-500">Advertise done</p>
+                      ) : (
+                        <button
+                          onClick={() => handleAdvertise(item._id)}
+                          class="btn bg-green-500 btn-sm hover:bg-green-700"
+                        >
+                          Advertise
+                        </button>
+                      )}
+                    </td>
+                    <td>
                       <button
                         onClick={() => handelDelete(item._id)}
-                        className="btn"
+                        className="btn btn-sm"
                       >
                         Delete
                       </button>
