@@ -29,6 +29,24 @@ const AllUsers = () => {
         });
     }
   };
+  const veified = {
+    veified: "Varified",
+  };
+
+  const updateVarify = (email) => {
+    fetch(`http://localhost:5000/users/${email}`, {
+      method: "PATCH",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(veified),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          toast.success("Varified Account");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -41,6 +59,7 @@ const AllUsers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Verify Request</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -51,6 +70,18 @@ const AllUsers = () => {
                 <td>{user.userName}</td>
                 <td>{user.email}</td>
                 <td>{user?.role}</td>
+                <td>
+                  <button
+                    className={
+                      user?.userVerify === "Varified"
+                        ? "bg-green-500 btn-disabled text-white btn-sm rounded :opacity-75"
+                        : "bg-black text-white "
+                    }
+                    onClick={() => updateVarify(user.email)}
+                  >
+                    {user?.userVerify}
+                  </button>
+                </td>
                 <td>
                   {user?.role !== "admin" ? (
                     <button
