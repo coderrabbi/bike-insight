@@ -18,6 +18,7 @@ import AllProducts from "../components/Dadhboard/AllProducts/AllProducts";
 import Payment from "../components/Dadhboard/MyProducts/Payment/Payment";
 import AdvertiseProduct from "../components/AdvertiseProduct/AdvertiseProduct";
 import Profile from "../Pages/Profile/Profile";
+import Blog from "../Pages/Blog/Blog";
 
 export const routes = createBrowserRouter([
   { path: "*", element: <NotFound /> },
@@ -27,10 +28,10 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: () => fetch("http://localhost:5000/products"),
         element: <Home />,
       },
       { path: "/login", element: <Login /> },
+      { path: "/blog", element: <Blog /> },
       { path: "/register", element: <Register /> },
       {
         path: "/profile",

@@ -25,12 +25,11 @@ const Footer = () => {
             </Link>
             <div className="mt-4 lg:max-w-sm">
               <p className="text-sm text-gray-200">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam.
+                Bike Insight is a old bike buy and sell website. We provide best
+                way to communicate buyer and seller with adminstration control.
               </p>
               <p className="mt-4 text-sm text-gray-200">
-                Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                beatae vitae dicta sunt explicabo.
+                Explore Bike Insight and chosse your favourite bike.
               </p>
             </div>
           </div>
@@ -65,134 +64,74 @@ const Footer = () => {
             </div>
             <div>
               <p className="font-semibold  text-xl tracking-wide text-white">
-                Cherry
+                Menu
               </p>
               <ul className="mt-2 space-y-2">
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 text-gray-200 hover:text-white"
                   >
-                    Web
-                  </a>
+                    Home
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/about"
                     className="transition-colors duration-300 text-gray-200 hover:text-white"
                   >
-                    eCommerce
-                  </a>
+                    About us
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/blog"
                     className="transition-colors duration-300 text-gray-200 hover:text-white"
                   >
-                    Business
-                  </a>
+                    Blog
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/contact"
                     className="transition-colors duration-300 text-gray-200 hover:text-white"
                   >
-                    Entertainment
-                  </a>
+                    Contact
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/login"
                     className="transition-colors duration-300 text-gray-200 hover:text-white"
                   >
-                    Portfolio
-                  </a>
+                    Login
+                  </Link>
                 </li>
               </ul>
             </div>
-            <div>
-              <p className="font-semibold  text-xl tracking-wide text-white">
-                Apples
-              </p>
-              <ul className="mt-2 space-y-2">
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
+
+            <div className="w-full dark:bg-red-500 col-span-2">
+              <div className="container flex flex-col flex-wrap  content-center justify-center p-4 py-20 mx-auto md:p-10">
+                <h1 className="text-5xl antialiased font-semibold leading-none text-center dark:text-gray-100">
+                  Get Our Updates
+                </h1>
+                <p className="pt-2 pb-8 text-xl antialiased text-center dark:text-gray-100">
+                  Find out about events and other news
+                </p>
+                <div className="flex flex-row">
+                  <input
+                    type="text"
+                    placeholder="example@email.com"
+                    className="w-3/5 p-3 rounded-l-lg sm:w-2/3"
+                  />
+                  <button
+                    type="button"
+                    className="w-2/5 p-3 font-semibold rounded-r-lg sm:w-2/5 dark:bg-black dark:text-white"
                   >
-                    Media
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Brochure
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Nonprofit
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Educational
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Projects
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="font-semibold tracking-wide text-white">Business</p>
-              <ul className="mt-2 space-y-2">
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Infopreneur
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Personal
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Wiki
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-gray-200 hover:text-white"
-                  >
-                    Forum
-                  </a>
-                </li>
-              </ul>
+                    Subscribe
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

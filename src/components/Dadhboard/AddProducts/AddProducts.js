@@ -1,23 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import moment from "moment";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../Context/AuthProvider";
 import styles from "../../../styles";
-import axios from "axios";
 const AddProducts = () => {
   const { user } = useContext(AuthContext);
   const [category, setCategory] = useState("");
   const [userVarified, setUserVarified] = useState({});
-  console.log(userVarified);
 
   useEffect(() => {
-    const varifiedUser = async () => {
-      const res = axios.get(`http://localhost:5000/users/${user?.email}`);
-      setUserVarified(res.data);
-    };
-    varifiedUser();
+    fetch(`http://localhost:5000/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setUserVarified(data.userVerify));
   }, [user?.email]);
+  console.log(userVarified);
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -43,6 +39,7 @@ const AddProducts = () => {
       description: description,
       category: category,
       advertise: false,
+      userVarified,
       created: moment().format("MMM Do YY"),
     };
     fetch(`http://localhost:5000/products`, {

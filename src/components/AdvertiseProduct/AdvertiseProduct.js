@@ -9,6 +9,7 @@ import { BiCategory } from "react-icons/bi";
 import { FcAdvertising } from "react-icons/fc";
 import BuyModal from "../BuyModal/BuyModal";
 import styles from "../../styles";
+import { GiConfirmed } from "react-icons/gi";
 
 const AdvertiseProduct = () => {
   const [adItems, setAdItems] = useState([]);
@@ -106,6 +107,12 @@ const AdvertiseProduct = () => {
                       <FcAdvertising />
                       {item?.advertise ? "Ad" : ""}
                     </div>
+                    {item.userVarified === "Varified" && (
+                      <div className="flex gap-2 items-center">
+                        <GiConfirmed className="bg-green-500 rounded-full text-white" />
+                        <span>Varified User</span>
+                      </div>
+                    )}
                   </div>
                 </div>{" "}
                 {/* modal */}

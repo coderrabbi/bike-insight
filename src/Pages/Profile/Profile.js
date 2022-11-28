@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const [userData, setuserData] = useState([]);
-  const [varifiedUser, setVerifiedUser] = useState({});
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,13 +30,15 @@ const Profile = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          setVerifiedUser(data.matchedCount);
+          fetch(`http://localhost:5000/users/${email}`)
+            .then((res) => res.json())
+            .then((data) => console.log(data));
           toast.success("Request To Admin To Verify Your Account");
         }
       })
       .catch((err) => console.log(err));
   };
-
+  console.log(userData);
   return (
     <div>
       <section className="pt-16 bg-blueGray-50">
@@ -60,9 +61,8 @@ const Profile = () => {
               </div>
               <div className="text-center mt-12">
                 <div className="flex justify-center items-center gap-3">
-                  {" "}
                   <BsFillPersonFill />
-                  <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                  <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700 ">
                     {user?.displayName}
                   </h3>
                 </div>
@@ -89,13 +89,17 @@ const Profile = () => {
 
                     {userData?.isSeller ? (
                       <button
-                        className="btn btn-sm"
+                        className={`btn ${
+                          userData.userVerify ? `btn-disabled` : `btn-sm`
+                        } `}
                         onClick={() => handleReq(userData?.email)}
                       >
-                        {varifiedUser > 0 ? (
-                          <span>requested</span>
+                        {userData?.userVerify === "requested to verify" ? (
+                          <span className="text-green-500">requested</span>
+                        ) : userData.userVerify === "Varified" ? (
+                          <span className="text-green-500 ">Varified</span>
                         ) : (
-                          <span>request for varify user</span>
+                          ""
                         )}
                       </button>
                     ) : (

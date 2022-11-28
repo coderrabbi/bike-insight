@@ -8,16 +8,17 @@ import {
   BsFillGearFill,
   BsFillAlarmFill,
 } from "react-icons/bs";
+import { GiConfirmed } from "react-icons/gi";
 import { BiCategory } from "react-icons/bi";
+import { FcAdvertising } from "react-icons/fc";
 const Bikes = () => {
   const data = useLoaderData();
   const [details, setDetails] = useState(null);
-  console.log(data);
 
   return (
     <div className={`${styles.padding}  flex flex-col items-center`}>
       <h1 className="md:text-[60px] text-[40px] font-semibold uppercase text-center">
-        {data[0].categoryName}
+        {data[0].category} bikes
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 justify-center">
         {data.map((item) => (
@@ -87,6 +88,20 @@ const Bikes = () => {
                   <BsFillAlarmFill />
                   {item.created}
                 </div>
+                {item?.advertise ? (
+                  <div className="flex gap-2 items-center">
+                    <FcAdvertising /> Ad
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                {item.userVarified === "Varified" && (
+                  <div className="flex gap-2 items-center">
+                    <GiConfirmed className="bg-green-500 rounded-full text-white" />
+                    <span>Varified User</span>
+                  </div>
+                )}
               </div>
             </div>{" "}
             {/* modal */}
