@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Project Name `bike insight`
+
+### `Feature this site`
+
+1)This is bike resale website you can buy and sell your bike easily from this site.
+2)You can create a acount on this site. 3) This site have 3 User Role 1.Admin,2)Seller,3)Buyer.
+4)Buyer Only view the products and order the products.
+5)Seller can buy and sell bike on this site. 6) Admin can kind of everything on this site he/she can delete the users/products,verify the user ,see all user and see all products.
+7)This site have payment method you can payment on this site.

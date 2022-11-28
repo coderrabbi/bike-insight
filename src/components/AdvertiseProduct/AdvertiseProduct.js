@@ -16,7 +16,11 @@ const AdvertiseProduct = () => {
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products`)
+    fetch(`http://localhost:5000/products`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setAdItems(data));
   }, []);
