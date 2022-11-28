@@ -38,7 +38,6 @@ const Profile = () => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(userData);
   return (
     <div>
       <section className="pt-16 bg-blueGray-50">
