@@ -13,7 +13,9 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`http://localhost:5000/users/${user.email}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_BASE_URL}/users/${user.email}`
+      );
       setuserData(res.data);
     };
     fetchUser();
@@ -22,7 +24,7 @@ const Profile = () => {
     varify: "requested to verify",
   };
   const handleReq = (email) => {
-    fetch(`http://localhost:5000/users/${email}`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users/${email}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(varifyUser),
@@ -30,7 +32,7 @@ const Profile = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          fetch(`http://localhost:5000/users/${email}`)
+          fetch(`${process.env.REACT_APP_SERVER_URL}/users/${email}`)
             .then((res) => res.json())
             .then((data) => console.log(data));
           toast.success("Request To Admin To Verify Your Account");
@@ -38,6 +40,7 @@ const Profile = () => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <div>
       <section className="pt-16 bg-blueGray-50">
@@ -48,13 +51,13 @@ const Profile = () => {
                 <div className="w-full px-4 flex justify-center">
                   <div className="relative">
                     <img
-                      alt="..."
-                      src={user?.photoURL ? user.photoURL : avater}
-                      className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                      src={user.photoURL ? user.photoURL : avater}
+                      alt=""
+                      className="rounded-full h-[150px]"
                     />
                   </div>
                 </div>
-                <div className="w-full px-4 text-center mt-20">
+                <div className="w-full px-4 text-center">
                   <div className="flex justify-center py-4 lg:pt-4 pt-8"></div>
                 </div>
               </div>

@@ -35,7 +35,7 @@ export const routes = createBrowserRouter([
       { path: "/register", element: <Register /> },
       {
         path: "/profile",
-        loader: () => fetch(`http://localhost:5000/users`),
+        loader: () => fetch(`${process.env.REACT_APP_SERVER_URL}/users`),
         element: (
           <PrivetRouter>
             <Profile />
@@ -44,13 +44,15 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/advertiseitems",
-        loader: () => fetch("http://localhost:5000/products"),
+        loader: () => fetch(`${process.env.REACT_APP_SERVER_URL}/products`),
         element: <AdvertiseProduct />,
       },
       {
         path: "/products/:category",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.category}`),
+          fetch(
+            `${process.env.REACT_APP_SERVER_URL}/products/${params.category}`
+          ),
         element: (
           <PrivetRouter>
             <Bikes />
@@ -105,7 +107,7 @@ export const routes = createBrowserRouter([
         path: "/dashboard/payments/:id",
         element: <Payment />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(`${process.env.REACT_APP_SERVER_URL}/bookings/${params.id}`),
       },
     ],
   },
