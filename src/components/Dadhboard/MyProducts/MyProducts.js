@@ -6,7 +6,7 @@ const MyProducts = () => {
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
 
-  fetch(`http://localhost:5000/products?email=${user.email}`)
+  fetch(`${process.env.REACT_APP_SERVER_URL}/products?email=${user.email}`)
     .then((res) => res.json())
     .then((data) => {
       setProducts(data);
@@ -15,7 +15,7 @@ const MyProducts = () => {
   const handelDelete = (id) => {
     const confirm = window.confirm("Are you sure you want to delete");
     if (confirm) {
-      fetch(`http://localhost:5000/products/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -34,7 +34,7 @@ const MyProducts = () => {
     advertise: true,
   };
   const handleAdvertise = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}products/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

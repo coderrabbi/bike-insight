@@ -64,7 +64,7 @@ const CheckOut = ({ bookingData }) => {
       createdAt: moment().format("MMM Do YY"),
     };
     try {
-      fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/payments`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/payments`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

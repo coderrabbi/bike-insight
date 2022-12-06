@@ -8,7 +8,7 @@ const MyOrders = () => {
   const [orderData, setOrderData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/bookings?email=${user?.email}`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -21,7 +21,7 @@ const MyOrders = () => {
   const handelDelete = (id) => {
     const confirm = window.confirm("Are you sure you want to delete");
     if (confirm) {
-      fetch(`http://localhost:5000/bookings/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/bookings/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

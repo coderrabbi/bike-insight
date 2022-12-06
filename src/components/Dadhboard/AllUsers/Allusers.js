@@ -6,7 +6,7 @@ const AllUsers = () => {
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users`);
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/users`);
       const data = await res.json();
       return data;
     },
@@ -16,7 +16,7 @@ const AllUsers = () => {
   const handelDelete = (email) => {
     const confirm = window.confirm("Are you sure you want to delete");
     if (confirm) {
-      fetch(`http://localhost:5000/users/${email}`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/users/${email}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

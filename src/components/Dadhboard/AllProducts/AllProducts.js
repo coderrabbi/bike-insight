@@ -6,7 +6,7 @@ const AllProducts = () => {
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/products`);
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/products`);
       const data = await res.json();
       return data;
     },
@@ -15,7 +15,7 @@ const AllProducts = () => {
   const handelDelete = (id) => {
     const confirm = window.confirm("Are you sure you want to delete");
     if (confirm) {
-      fetch(`http://localhost:5000/products/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

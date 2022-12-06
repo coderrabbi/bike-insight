@@ -9,7 +9,7 @@ const AddProducts = () => {
   const [userVarified, setUserVarified] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setUserVarified(data.userVerify));
   }, [user?.email]);
@@ -42,7 +42,7 @@ const AddProducts = () => {
       userVarified,
       created: moment().format("MMM Do YY"),
     };
-    fetch(`http://localhost:5000/products`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/products`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(productInfo),

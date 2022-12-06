@@ -19,7 +19,7 @@ const Payment = () => {
   const description = `Bike insight payment: Name:${user?.displayName}, Email: ${email}, Amount: ${sellprice}`;
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/create-payment-intent`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/create-payment-intent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sellprice, description }),
